@@ -1,3 +1,6 @@
+---
+output: html_document
+---
 #Seizure prediction using convolutional neural networks
 
 ##Introduction
@@ -10,7 +13,7 @@ This document explains a solution for [Kaggle Seizure Prediction Challenge](http
 
 ##Features
 
-The first preprocessing step was to filter iEEG data to 0.1-180 Hz. Then I used a similar approach as described in [1]: each 10 minutes clip was partitioned into non-overlapping 1(2) minute frames, which were Fourier transformed and resulting amplitude spectrum was divided into 6 frequency bands: delta (0.1â€“4 Hz), theta (4â€“8 Hz), alpha (8â€“12 Hz), beta (12â€“30 Hz), low­gamma (30â€“70 Hz), and high­gamma (70â€“180 Hz). Within each band I took a log10 of geometrical mean of the amplitude spectrum over band frequencies. So one 10 minutes data clip with *N* channels transforms into *Nx6x10* image. 
+The first preprocessing step was to filter iEEG data to 0.1-180 Hz. Then I used a similar approach as described in [1]: each 10 minutes clip was partitioned into non-overlapping 1(2) minute frames, which were Fourier transformed and resulting amplitude spectrum was divided into 6 frequency bands: delta (0.1-4 Hz), theta (4-8 Hz), alpha (8-12 Hz), beta (12-30 Hz), low­gamma (30-70 Hz), and high­gamma (70-180 Hz). Within each band I took a log10 of geometrical mean of the amplitude spectrum over band frequencies. So one 10 minutes data clip with *N* channels transforms into *Nx6x10* image. 
 
 I tried two normalization schemes (for each channel separately): 
 
@@ -46,3 +49,4 @@ if someone is interested.
 
 ## References
 1. Howbert JJ, Patterson EE, Stead SM, Brinkmann B, Vasoli V, Crepeau D, Vite CH, Sturges B, Ruedebusch V, Mavoori J, Leyde K, Sheffield WD, Litt B, Worrell GA (2014) Forecasting seizures in dogs with naturally occurring epilepsy. PLoS One 9(1):e81920.
+
