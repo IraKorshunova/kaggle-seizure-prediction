@@ -37,7 +37,7 @@ To calibrate the predictions between subjects, I used min-max scaler on test pro
 
 ##Model averaging
 
-The submission, which finished in the 12th place and public/private score of 0.81292/0.78513 was an average prediction of models with global pooling layer and different combinations of parameters: number of kernels in convolutional layers, number of hidden units, amount of dropout, normalization scheme, number of time frames, overlap between clips, use of test data during normalizing the training data etc. All settings files can be found [here](https://github.com/IraKorshunova/kaggle-seizure-prediction/tree/master/settings_dir) and lists of ensembles is [here](https://github.com/IraKorshunova/kaggle-seizure-prediction/blob/master/utils/averager.py).
+The submission, which finished in the 12th place and public/private score of 0.81292/0.78513 was an average prediction of models with global pooling layer and different combinations of parameters: number of kernels in convolutional layers, number of hidden units, amount of dropout, normalization scheme, number of time frames, overlap between clips, use of test data during normalizing the training data etc. All settings files can be found [here](https://github.com/IraKorshunova/kaggle-seizure-prediction/tree/master/settings_dir) and list of ensembles is [here](https://github.com/IraKorshunova/kaggle-seizure-prediction/blob/master/utils/averager.py).
 
 
 ##Code description
