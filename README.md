@@ -6,7 +6,7 @@ This document explains a solution for [Kaggle Seizure Prediction Challenge](http
 
 1. EEG signal is nonstationary, so one needs to consider shorter time windows to extract meaningful features. This in turn requires a method for combining information from different blocks to get a prediction for the whole 10 minutes clip. Convnets with convolution through time seemed to be a good approach to deal with this. Moreover, using smaller windows increases the number of features, but because of shared weights number of convnet's parameters remain small relatively to a standard neural network architecture. 
 
-2. In the previous [competition on seizure detection](http://www.kaggle.com/c/seizure-detection) the winning solution effectively exploited FFT features and correlations between EEG channels, so presumably if one does convolution across all channels on FFT data, convnet can learn correlations in frequency domain automatically, but for now I have no idea what my networks learned.
+2. In the previous [competition on seizure detection](http://www.kaggle.com/c/seizure-detection) the winning solution effectively exploited FFT features and correlations between EEG channels, so presumably if one does convolution across all channels on FFT data, convnet should learn correlations in frequency domain automatically.
 
 ##Features
 
