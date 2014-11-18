@@ -1,6 +1,3 @@
----
-output: html_document
----
 #Seizure prediction using convolutional neural networks
 
 ##Introduction
@@ -26,7 +23,7 @@ Some models from the resulting ensemble were trained with an additional feature:
 
 ##Network architecture
 
-An architecture of the model, which appeared to be the best on public leaderboard is shown on the Figure 1. It receives an input after the 1st normalization scheme, and its first layer performs convolution in a time dimension over all channels and all frequency bins, so the shape of its filters is *(64x1)*. Second convolutional layer is fully-connected with a hidden layer. Rectified linear units are used in all layers and last 2 layers have a dropout of 0.2 and 0.5. On public/private leaderboard this model scored 0.81448/0.76256.
+The architecture of the model, which appeared to be the best on a public leaderboard is shown on the Figure 1. It receives an input after the 1st normalization scheme, and its first layer performs convolution in a time dimension over all channels and all frequency bins, so the shape of its filters is *(64x1)*. Second convolutional layer is fully-connected with a hidden layer. Rectified linear units are used in all layers, and last 2 layers have a dropout of 0.2 and 0.5. On public/private leaderboard this model scored 0.81448/0.76256.
 
 ![Figure 1](/images/fig_1.png)
 
@@ -36,7 +33,7 @@ Intuitively the location of some feature in time should not be relevant, therefo
 
 
 Public LB scores were misleading by scoring no-global-pooling models higher than models with global pooling layer. It appeared to be completely opposite situation on a private leaderboard. However, public LB was the only source of validation as I used stratified split without keeping the sequences intact, thus getting very optimistic results. I tried to keep the sequences, but for some train-validation splits models were not training long enough (when using early-stopping). Later I started to train my models for a fixed number of updates and using data augmentation by overlapping clips from the same sequence on some number of time frames, e.g. if clip consists of 10 time frames, overlap of 9 frames yields approximately 9 times bigger dataset.
-To calibrate the predictions between subject I used min-max scaler on test probabilities, which used to improve the score on ~0.015. 
+To calibrate the predictions between subject, I used min-max scaler on test probabilities, which used to improve the score on ~0.015. 
 
 ##Model averaging
 
@@ -44,8 +41,7 @@ The submission, which finished in the 12th place and public/private score of 0.8
 
 
 ##Code description
-It's a beautiful Python+Theano code and I will add its description later
-if someone is interested.
+It's a beautiful Python+Theano code, and I will add its description later if someone is interested.
 
 ## References
 1. Howbert JJ, Patterson EE, Stead SM, Brinkmann B, Vasoli V, Crepeau D, Vite CH, Sturges B, Ruedebusch V, Mavoori J, Leyde K, Sheffield WD, Litt B, Worrell GA (2014) Forecasting seizures in dogs with naturally occurring epilepsy. PLoS One 9(1):e81920.
