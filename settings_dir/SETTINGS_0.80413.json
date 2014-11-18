@@ -1,0 +1,41 @@
+{
+        "path":{
+        "root" : "/mnt/sda4/CODING/python/kaggle_data",
+        "raw_data_path" : "/mnt/sda4/CODING/python/kaggle_data/raw_data",
+        "processed_data_path" :"/mnt/sda4/CODING/python/kaggle_data/processed_data",
+        "model_path" : "/mnt/sda4/CODING/python/kaggle_data/models",
+        "submission_path" : "/mnt/sda4/CODING/python/kaggle_data/submissions"
+    },
+
+
+    "preprocessor":{
+        "highcut" : 180,
+        "lowcut" : 0.1,
+        "nfreq_bands": 6,
+        "win_length_sec": 120,
+        "features": "meanlog",
+        "stride_sec": 120
+    },
+
+    "validation":{
+     "random_split": 1,
+     "max_iter" : 150000,
+     "valid_freq" : 10
+    },
+
+    "model":{
+        "scale_time": 0,
+        "use_test": 0,
+        "overlap" : 0,
+        "dropout_prob" : [0.2, 0.5],
+        "training_batch_size" : 10,
+        "activation" : ["relu", "relu", "relu"],
+        "weights_variance" : 0.01,
+        "l2_reg" : 0.0001,
+        "recept_width" : [1, 1],
+        "pool_width" : [1, 1],
+        "nkerns" : [16, 32, 128],
+        "stride" : [1, 1],
+        "global_pooling": 0
+    }
+}
