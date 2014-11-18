@@ -1,6 +1,3 @@
----
-output: html_document
----
 #Seizure prediction using convolutional neural networks
 
 ##Introduction
