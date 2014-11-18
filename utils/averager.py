@@ -58,9 +58,9 @@ if __name__ == '__main__':
 
     ensemble8_settings = ['0.81448', '0.80888', '0.80872', '0.80614', '0.80533']
 
+    # final model: 0.78513 on private LB
     ensemble9_settings = ['0.80872', '0.80614', '0.80533', '0.80192', '0.79964', '0.79886', '0.79882', '0.79865',
                           '0.79833', '0.78967', '0.78612']
-
 
 
     ensembles_settings = [ensemble0_settings, ensemble1_settings, ensemble2_settings, ensemble3_settings,
