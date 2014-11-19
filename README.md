@@ -33,7 +33,7 @@ Intuitively the location of some feature in time should not be relevant, therefo
 
 
 Public LB scores were misleading by scoring no-global-pooling models higher than models with global pooling layer. It appeared to be completely opposite on the private leaderboard. However, public LB was the only source of validation as I used stratified split without keeping the sequences intact, thus getting very optimistic results. I tried to keep the sequences, but for some train-validation splits models were not training long enough (when using early-stopping). Later I started to train my models for a fixed number of updates and using data augmentation by overlapping clips from the same sequence on some number of time frames, e.g. if clip consists of 10 time frames, overlap of 9 frames yields approximately a 9 times bigger dataset.
-To calibrate the predictions between subjects, I used min-max scaler on test probabilities, which used to improve the score on ~0.015. 
+To calibrate the predictions between subjects, I used min-max scaling on test probabilities, which used to improve the score on ~0.015 (although I think it was a bad idea to allow test data usage). 
 
 ##Model averaging
 
