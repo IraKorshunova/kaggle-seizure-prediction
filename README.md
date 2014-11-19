@@ -2,7 +2,7 @@
 
 ##Introduction
 
-This document discusses my approach for the [Kaggle Seizure Prediction Challenge](http://www.kaggle.com/c/seizure-prediction), which resulted in the 12th place in the ranking. The goal of the competition was to classify 10 minute intracranial EEG (iEEG) data clips into "Preictal" for pre-seizure data or "Interictal" for non-seizure data segments. To tackle this problem I used convolutional neural networks (convnets) for the following reasons:
+This document discusses my approach for the [Kaggle Seizure Prediction Challenge](http://www.kaggle.com/c/seizure-prediction), which resulted in the 11th place in the ranking. The goal of the competition was to classify 10 minute intracranial EEG (iEEG) data clips into "Preictal" for pre-seizure data or "Interictal" for non-seizure data segments. To tackle this problem I used convolutional neural networks (convnets) for the following reasons:
 
 1. EEG signal is nonstationary, so one needs to consider shorter time windows to extract meaningful features. This in turn requires a method for combining information from different blocks to get a prediction for the whole 10 minutes clip. Convnets with convolution through time seemed to be a good approach to deal with this. Moreover, using smaller windows increases the number of features, but because of shared weights the number of convnet parameters remain small relatively to a standard neural network architecture. 
 
@@ -37,11 +37,11 @@ To calibrate the predictions between subjects, I used min-max scaling on test pr
 
 ##Model averaging
 
-The submission, which finished in the 12th place and public/private score of 0.81292/0.78513 was an average prediction of the models with a global pooling layer and different combinations of parameters: number of kernels in convolutional layers, number of hidden units, amount of dropout, normalization scheme, number of time frames, overlap between clips, use of test data during normalizing the training data etc. Some of the settings files can be found [here](https://github.com/IraKorshunova/kaggle-seizure-prediction/tree/master/settings_dir) and list of ensembles is [here](https://github.com/IraKorshunova/kaggle-seizure-prediction/blob/master/utils/averager.py). In fact, I did a lot more experiments, and it took me a while to figure out a reasonable convnet architecture, but this discussion I will leave for my future thesis.
+The submission, which finished in the 11th place and public/private score of 0.81292/0.78513 was an average prediction of the models with a global pooling layer and different combinations of parameters: number of kernels in convolutional layers, number of hidden units, amount of dropout, normalization scheme, number of time frames, overlap between clips, use of test data during normalizing the training data etc. Some of the settings files can be found [here](https://github.com/IraKorshunova/kaggle-seizure-prediction/tree/master/settings_dir) and list of ensembles is [here](https://github.com/IraKorshunova/kaggle-seizure-prediction/blob/master/utils/averager.py). In fact, I did a lot more experiments, and it took me a while to figure out a reasonable convnet architecture, but this discussion I will leave for my future thesis.
 
 
 ##Code description
-It's a beautiful Python+Theano code, and I will add its description later if someone is interested.
+It's a beautiful Python+Theano code, however not optimized to run on GPU. Its description I will add later if someone is interested.
 
 ## References
 1. Howbert JJ, Patterson EE, Stead SM, Brinkmann B, Vasoli V, Crepeau D, Vite CH, Sturges B, Ruedebusch V, Mavoori J, Leyde K, Sheffield WD, Litt B, Worrell GA (2014) Forecasting seizures in dogs with naturally occurring epilepsy. PLoS One 9(1):e81920.
