@@ -2,9 +2,13 @@ import numpy as np
 import copy
 
 
-class RandomTrainIterator(object):
-    def __init__(self, dataset, batch_size):
-        self.x, self.y = dataset
+class FoldIterator(object):
+    def __init__(self, dataset):
+        self.x_preictal, self.x_interictal = dataset['preictal'], dataset['interictal']
+        n_preictal_hours = len(self.x_preictal)
+        n_interictal_hours  = len(self.x_interictal)
+        n_interictal_blocks = n_interictal_hours/n_preictal_hours
+
         self.rng = np.random.RandomState(56051315)
         self.idx = np.arange(len(self.x))
         self.batch_size = batch_size

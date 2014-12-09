@@ -29,6 +29,8 @@ def average_submission_files(submission_names, out_submission_name):
 
     dfs = [read_csv(submission_name) for submission_name in submission_names]
     p1_list = [df['preictal'].values for df in dfs]
+    p1_array = np.vstack(p1_list)
+    print np.cov(p1_array)
     p1_avg = average(p1_list).squeeze()
     id = dfs[0]['clip'].values
     df = DataFrame(data=zip(id, p1_avg), columns=['clip', 'preictal'])
@@ -38,42 +40,26 @@ def average_submission_files(submission_names, out_submission_name):
 
 if __name__ == '__main__':
 
-    ensemble0_settings = ['0.81448', '0.80888', '0.80614', '0.80413', '0.80192', '0.79964']
-
-    ensemble1_settings = ['0.81448', '0.80888', '0.80872', '0.80614', '0.80533', '0.80413', '0.80192', '0.79964', '0.79886',
-                          '0.79882', '0.79865', '0.79833', '0.78967', '0.78953', '0.78612']
-
-    ensemble2_settings = ['0.81448', '0.80888', '0.80614', '0.80413', '0.80192', '0.79964', '0.79833', '0.79882']
-
-    ensemble3_settings = ['0.81448', '0.80888', '0.80614', '0.80533', '0.80413', '0.80192']
-
-    ensemble4_settings = ['0.81448', '0.80888', '0.80614', '0.80533', '0.80413', '0.80192', '0.79964']
-
-    ensemble5_settings = ['0.81448', '0.80888', '0.80614', '0.80533', '0.80413', '0.80192', '0.79964', '0.79886',
-                          '0.79882', '0.79865', '0.79833']
-
-    ensemble6_settings = ['0.81448', '0.80888', '0.80872', '0.80614', '0.80533', '0.80413', '0.80192', '0.79964']
-
-    ensemble7_settings = ['0.81448', '0.80888', '0.80872', '0.80614', '0.80533', '0.80413', '0.80192']
-
-    ensemble8_settings = ['0.81448', '0.80888', '0.80872', '0.80614', '0.80533']
-
     # final model: 0.78513 on private LB
-    ensemble9_settings = ['0.80872', '0.80614', '0.80533', '0.80192', '0.79964', '0.79886', '0.79882', '0.79865',
+    ensemble_settings0 = ['0.80872', '0.80614', '0.80533', '0.80192',
+                          '0.79964', '0.79886', '0.79882', '0.79865',
                           '0.79833', '0.78967', '0.78612']
 
+    ensemble_settings1 = ['0.80872', '0.80533', '0.80192',
+                          '0.79964', '0.79886', '0.79882', '0.79865',
+                          '0.79833', '0.78612']
 
-    ensembles_settings = [ensemble0_settings, ensemble1_settings, ensemble2_settings, ensemble3_settings,
-                          ensemble4_settings, ensemble5_settings, ensemble6_settings, ensemble7_settings,
-                          ensemble8_settings, ensemble9_settings]
+    ensembles_settings = [ensemble_settings0, ensemble_settings1]
 
     for i, ensemble_setting in enumerate(ensembles_settings):
         ensemble_setting = ['settings_dir/SETTINGS_' + s + '.json' for s in ensemble_setting]
         submissions = []
         for settings_file in ensemble_setting:
+            print settings_file
             with open(settings_file) as f:
                 settings_dict = json.load(f)
-            submission_path = settings_dict['path']['submission_path'] + '/' + create_cnn_model_name(settings_dict)
+            submission_path = settings_dict['path']['model_path'] + '/' + create_cnn_model_name(
+                settings_dict) + '/submission'
             submission_path += '/submission_scaled.csv'
             submissions.append(submission_path)
         average_submission_files(submissions, 'submission_average' + str(i))

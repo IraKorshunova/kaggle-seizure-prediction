@@ -3,8 +3,7 @@
         "root" : "/mnt/sda4/CODING/python/kaggle_data",
         "raw_data_path" : "/mnt/sda4/CODING/python/kaggle_data/raw_data",
         "processed_data_path" :"/mnt/sda4/CODING/python/kaggle_data/processed_data",
-        "model_path" : "/mnt/sda4/CODING/python/kaggle_data/models",
-        "submission_path" : "/mnt/sda4/CODING/python/kaggle_data/submissions"
+        "model_path" : "/mnt/sda4/CODING/python/kaggle_data/models"
     },
 
 

@@ -33,7 +33,8 @@ if __name__ == '__main__':
     with open('../SETTINGS.json') as f:
         settings_dict = json.load(f)
 
-    submission_path = settings_dict['path']['submission_path'] + '/' + create_cnn_model_name(settings_dict)
+    submission_path = settings_dict['path']['submission_path'] + '/' + create_cnn_model_name(
+        settings_dict) + '/submission'
     print submission_path
 
     subjects = ['Dog_1', 'Dog_2', 'Dog_3', 'Dog_4', 'Dog_5', 'Patient_1', 'Patient_2']

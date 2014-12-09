@@ -3,8 +3,7 @@
         "root" : "/mnt/sda4/CODING/python/kaggle_data",
         "raw_data_path" : "/mnt/sda4/CODING/python/kaggle_data/raw_data",
         "processed_data_path" :"/mnt/sda4/CODING/python/kaggle_data/processed_data",
-        "model_path" : "/mnt/sda4/CODING/python/kaggle_data/models",
-        "submission_path" : "/mnt/sda4/CODING/python/kaggle_data/submissions"
+        "model_path" : "/mnt/sda4/CODING/python/kaggle_data/models"
     },
 
 
@@ -12,9 +11,9 @@
         "highcut" : 180,
         "lowcut" : 0.1,
         "nfreq_bands": 6,
-        "win_length_sec": 120,
+        "win_length_sec": 60,
         "features": "meanlog_std",
-        "stride_sec": 120
+        "stride_sec": 60
     },
 
     "validation":{
@@ -26,7 +25,7 @@
     "model":{
         "scale_time": 1,
         "use_test": 1,
-        "overlap" : 4,
+        "overlap" : 9,
         "dropout_prob" : [0.3, 0.6],
         "training_batch_size" : 10,
         "activation" : ["relu", "relu", "tanh"],

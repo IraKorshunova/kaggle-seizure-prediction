@@ -1,4 +1,4 @@
-import numpy
+import numpy as np
 import theano
 from theano.tensor.nnet import conv
 from theano.tensor.signal import downsample
@@ -13,16 +13,16 @@ class ConvPoolLayer(object):
 
         if activation == 'tanh':
             activation_function = lambda x: T.tanh(x)
-            fan_in = numpy.prod(filter_shape[1:])
-            fan_out = (filter_shape[0] * numpy.prod(filter_shape[2:]) / numpy.prod(poolsize))
-            W_bound = numpy.sqrt(6. / (fan_in + fan_out))
-            W_values = numpy.asarray(rng.uniform(low=-W_bound, high=W_bound, size=filter_shape), dtype='float32')
-            b_values = numpy.zeros((filter_shape[0],), dtype='float32')
+            fan_in = np.prod(filter_shape[1:])
+            fan_out = (filter_shape[0] * np.prod(filter_shape[2:]) / np.prod(poolsize))
+            W_bound = np.sqrt(6. / (fan_in + fan_out))
+            W_values = np.asarray(rng.uniform(low=-W_bound, high=W_bound, size=filter_shape), dtype='float32')
+            b_values = np.zeros((filter_shape[0],), dtype='float32')
 
         elif activation == 'relu':
             activation_function = lambda x: T.maximum(0.0, x)
-            W_values = numpy.asarray(rng.normal(0.0, weights_variance, size=filter_shape), dtype='float32')
-            b_values = numpy.ones((filter_shape[0],), dtype='float32') / 10.0
+            W_values = np.asarray(rng.normal(0.0, weights_variance, size=filter_shape), dtype='float32')
+            b_values = np.ones((filter_shape[0],), dtype='float32') / 10.0
         else:
             raise ValueError('unknown activation function')
 

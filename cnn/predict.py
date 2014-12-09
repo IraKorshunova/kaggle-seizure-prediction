@@ -63,8 +63,8 @@ def run_predictor():
 
     model_path = settings_dict['path']['model_path'] + '/' + create_cnn_model_name(settings_dict)
     data_path = settings_dict['path']['processed_data_path'] + '/' + create_fft_data_name(settings_dict)
-    submission_path = settings_dict['path']['submission_path'] + '/' + create_cnn_model_name(settings_dict)
-
+    submission_path = model_path + '/submission'
+    print submission_path
     if not os.path.exists(submission_path):
         os.makedirs(submission_path)
     shutil.copy2('SETTINGS.json', submission_path + '/SETTINGS.json')

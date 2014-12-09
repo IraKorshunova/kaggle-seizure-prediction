@@ -21,7 +21,7 @@ def plot_train_test_sizes(subjects, data_path):
 
     plt_data = [dict_train, dict_test]
     data_orders = [subjects, subjects]
-    colors = [cm.Greys(1. * i / (len(subjects) + 2)) for i in range(len(subjects))]
+    colors = [cm.Blues(1. * i / (len(subjects) + 2)) for i in range(len(subjects))]
 
     values = np.array([[data[name] for name in subjects] for data, order in zip(plt_data, data_orders)])
     lefts = np.insert(np.cumsum(values, axis=1), 0, 0, axis=1)[:, :-1]
