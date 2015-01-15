@@ -2,24 +2,10 @@
 
 ##Introduction
 
-This document discusses my approach for the [Kaggle Seizure Prediction Challenge](http://www.kaggle.com/c/seizure-prediction), which resulted in the 10th place in the ranking. The goal of the competition was to classify 10 minute intracranial EEG (iEEG) data clips into "Preictal" for pre-seizure data or "Interictal" for non-seizure data segments. To tackle this problem I used convolutional neural networks (convnets) for the following reasons:
-
-1. EEG signal is nonstationary, so one needs to consider shorter time windows to extract meaningful features. This in turn requires a method for combining information from different blocks to get a prediction for the whole 10 minutes clip. Convnets with convolution through time seemed to be a good approach to deal with this. Moreover, using smaller windows increases the number of features, but because of shared weights the number of convnet parameters remain small relatively to a standard neural network architecture. 
-
-2. In the previous [competition on seizure detection](http://www.kaggle.com/c/seizure-detection) the winning solution effectively exploited FFT features and correlations between EEG channels, so presumably if one does convolution across all channels on FFT data, convnets should learn correlations in frequency domain automatically. These features appeared to work for seizure prediction as well, but I need to analyse what my networks actually learned. 
+This document discusses my approach for the [Kaggle Seizure Prediction Challenge](http://www.kaggle.com/c/seizure-prediction), which resulted in the 10th place in the ranking. The goal of the competition was to classify 10 minute intracranial EEG (iEEG) data clips into *preictal* for pre-seizure data or *interictal* for non-seizure data segments. For this problem I used convolutional neural networks (convnets). The following descriptions provides some excerpts from my master's thesis, which is available [here](kaggle-seizure-prediction/thesis.pdf).
 
 ##Features
 
-The first preprocessing step was to apply a band-pass filter on the iEEG data between 0.1-180 Hz. Next I applied a similar approach as described in [1]: each 10 minutes clip was partitioned into non-overlapping 1 minute frames, which were Fourier transformed and resulting amplitude spectrum was divided into 6 frequency bands: delta (0.1-4 Hz), theta (4-8 Hz), alpha (8-12 Hz), beta (12-30 Hz), low­gamma (30-70 Hz), and high­gamma (70-180 Hz). For each band I took a log10 of the  geometrical mean of the amplitude spectrum over these frequency bands. So one 10 minutes data clip with *N* channels transforms into *Nx6x10* input features. 
-
-I tried two normalization schemes (for each channel separately): 
-
-1. Use *6x10* distinct features, so we account for the position in time and frequency 
-
-2. Consider only 6 distinct features, for instance, values in delta frequency band from different time frames are of the same feature. So from one example *6x10* we have 10 examples *6x1* each.
-
-Some models from the resulting ensemble were trained with an additional feature: standard deviation of the signal in a particular time frame, so the input would be *Nx7x10*. 
- . 
 
 ##Network architecture
 
