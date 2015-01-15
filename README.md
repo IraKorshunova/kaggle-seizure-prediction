@@ -2,7 +2,7 @@
 
 ##Introduction
 
-This document discusses my approach for the [Kaggle Seizure Prediction Challenge](http://www.kaggle.com/c/seizure-prediction), which resulted in the 10th place in the ranking. The goal of the competition was to classify 10 minute intracranial EEG (iEEG) data clips into *preictal* for pre-seizure data or *interictal* for non-seizure data segments. For this problem I used convolutional neural networks (convnets). The following descriptions provides some excerpts from my master's thesis, which is available [here](kaggle-seizure-prediction/thesis.pdf).
+This document discusses my approach for the [Kaggle Seizure Prediction Challenge](http://www.kaggle.com/c/seizure-prediction), which resulted in the 10th place in the ranking. The goal of the competition was to classify 10 minute intracranial EEG (iEEG) data clips into *preictal* for pre-seizure data or *interictal* for non-seizure data segments. For this problem I used convolutional neural networks (convnets). The following description provides some excerpts from my master's thesis, which is available [here](kaggle-seizure-prediction/thesis.pdf).
 
 ##Features
 TODO
@@ -16,10 +16,10 @@ TODO
 
 ##Model averaging
 TODO
-[here](https://github.com/IraKorshunova/kaggle-seizure-prediction/tree/master/settings_dir) 
+[link](https://github.com/IraKorshunova/kaggle-seizure-prediction/tree/master/settings_dir) 
 
 
-##Code description
+##Code
 It's a beautiful Python+Theano code, however not optimized to run on GPU. Its description I will add later if someone is interested.
 
 ## References
