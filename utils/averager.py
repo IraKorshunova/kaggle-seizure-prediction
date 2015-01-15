@@ -45,11 +45,11 @@ if __name__ == '__main__':
                           '0.79964', '0.79886', '0.79882', '0.79865',
                           '0.79833', '0.78967', '0.78612']
 
-    ensemble_settings1 = ['0.80872', '0.80533', '0.80192',
-                          '0.79964', '0.79886', '0.79882', '0.79865',
-                          '0.79833', '0.78612']
+    # ensemble_settings1 = ['0.80872', '0.80533', '0.80192',
+    #                       '0.79964', '0.79886', '0.79882', '0.79865',
+    #                       '0.79833', '0.78612']
 
-    ensembles_settings = [ensemble_settings0, ensemble_settings1]
+    ensembles_settings = [ensemble_settings0]
 
     for i, ensemble_setting in enumerate(ensembles_settings):
         ensemble_setting = ['settings_dir/SETTINGS_' + s + '.json' for s in ensemble_setting]
@@ -60,7 +60,7 @@ if __name__ == '__main__':
                 settings_dict = json.load(f)
             submission_path = settings_dict['path']['model_path'] + '/' + create_cnn_model_name(
                 settings_dict) + '/submission'
-            submission_path += '/submission_scaled.csv'
+            submission_path += '/submissionminmax.csv'
             submissions.append(submission_path)
-        average_submission_files(submissions, 'submission_average' + str(i))
+        average_submission_files(submissions, 'submission_average_minmax' + str(i))
 

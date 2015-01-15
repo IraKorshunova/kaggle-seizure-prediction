@@ -64,7 +64,7 @@ def load_test_data(data_path, subject):
     data, id = [], []
     filenames = sorted(os.listdir(read_dir))
     for filename in sorted(filenames, key=lambda x: int(re.search(r'(\d+).mat', x).group(1))):
-        if 'test' in filename:
+        if 'test' in filename or 'holdout' in filename:
             data.append(loadmat(read_dir + '/' + filename, squeeze_me=True))
             id.append(filename)
 

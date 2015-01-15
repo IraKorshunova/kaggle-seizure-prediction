@@ -20,6 +20,10 @@ def group_into_bands(fft, fft_freq, nfreq_bands):
     # http://onlinelibrary.wiley.com/doi/10.1111/j.1528-1167.2011.03138.x/pdf
     elif nfreq_bands == 8:
         bands = [0.1, 4, 8, 12, 30, 50, 70, 100, 180]
+    elif nfreq_bands == 12:
+        bands = [0.1, 4, 8, 12, 30, 40, 50, 60, 70, 85, 100, 140, 180]
+    elif nfreq_bands == 9:
+        bands = [0.1, 4, 8, 12, 21, 30, 50, 70, 100, 180]
     else:
         raise ValueError('wrong number of frequency bands')
     freq_bands = np.digitize(fft_freq, bands)
@@ -89,7 +93,9 @@ def run_fft_preprocessor():
         os.makedirs(output_data_path)
     shutil.copy2('SETTINGS.json', output_data_path + '/SETTINGS.json')
 
-    subjects = ['Dog_1', 'Dog_2', 'Dog_3', 'Dog_4', 'Dog_5', 'Patient_1', 'Patient_2']
+    #subjects = ['Dog_1', 'Dog_2', 'Dog_3', 'Dog_4', 'Dog_5', 'Patient_1', 'Patient_2']
+    # subjects = ['Dog_1', 'Dog_2', 'Dog_3', 'Dog_4']
+    subjects=['Dog_5']
     for subject in subjects:
         print '>> fft', subject
         read_dir = input_data_path + '/' + subject

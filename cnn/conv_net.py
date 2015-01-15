@@ -77,6 +77,10 @@ class ConvNet(object):
         while not done_looping:
             for train_x, train_y in train_set_iterator:
                 self.train_model(train_x, train_y)
+                # if iter % 10 == 0:
+                #     self.batch_size.set_value(train_set[0].shape[0])
+                #     print self.validate_model(train_set[0], train_set[1])
+                #     self.batch_size.set_value(self.training_batch_size)
                 if iter > max_iter:
                     done_looping = True
                     break

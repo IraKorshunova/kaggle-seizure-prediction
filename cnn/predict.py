@@ -1,6 +1,8 @@
 import json, shutil, cPickle, os, csv
+import numpy as np
+import preprocessors.fft as fft
 from pandas import read_csv
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from theano import config
 from pandas import DataFrame
 from cnn.conv_net import ConvNet
@@ -11,13 +13,22 @@ from utils.data_scaler import scale_across_time, scale_across_features
 config.floatX = 'float32'
 
 
-def rescale(probability):
+def minmax_rescale(probability):
     scaler = MinMaxScaler(feature_range=(0.000000001, 0.999999999))
     return scaler.fit_transform(probability)
 
 
-def merge_csv_data(submission_path, subjects, submission_name, scale=True):
-    submission_name += '_scaled' if scale else ''
+def softmax_rescale(probability):
+    norm_x = StandardScaler().fit_transform(probability)
+    return 1.0 / (1.0 + np.exp(-norm_x))
+
+
+def median_scaler(x):
+    return (x - np.median(x))/2.0 + 0.5
+
+
+def merge_csv_data(submission_path, subjects, submission_name, scale=None):
+    submission_name += scale if scale else ''
 
     with open(submission_path + '/' + submission_name + '.csv', 'wb') as f:
         writer = csv.writer(f)
@@ -25,7 +36,13 @@ def merge_csv_data(submission_path, subjects, submission_name, scale=True):
 
     for subject in subjects:
         df = read_csv(submission_path + '/' + subject + '.csv')
-        df['preictal'] = rescale(df.drop('clip', axis=1).values)
+        df['clip'] = [subject+'_'+i for i in df['clip']]
+        if scale=='minmax':
+            df['preictal'] = minmax_rescale(df.drop('clip', axis=1).values)
+        elif scale =='softmax':
+            df['preictal'] = softmax_rescale(df.drop('clip', axis=1).values)
+        elif scale =='median':
+            df['preictal'] = median_scaler(df.drop('clip', axis=1).values)
         with open(submission_path + '/' + submission_name + '.csv', 'a') as f:
             df.to_csv(f, header=False, index=False)
 
@@ -65,16 +82,24 @@ def run_predictor():
     data_path = settings_dict['path']['processed_data_path'] + '/' + create_fft_data_name(settings_dict)
     submission_path = model_path + '/submission'
     print submission_path
+
+    if not os.path.exists(data_path):
+        fft.run_fft_preprocessor()
+
     if not os.path.exists(submission_path):
         os.makedirs(submission_path)
     shutil.copy2('SETTINGS.json', submission_path + '/SETTINGS.json')
 
     subjects = ['Dog_1', 'Dog_2', 'Dog_3', 'Dog_4', 'Dog_5', 'Patient_1', 'Patient_2']
+    #subjects = ['Dog_1', 'Dog_2', 'Dog_3', 'Dog_4']
     for subject in subjects:
         print '***********************', subject, '***************************'
         predict(subject, data_path, model_path, submission_path)
 
-    merge_csv_data(submission_path, subjects, submission_name='submission', scale=True)
+    merge_csv_data(submission_path, subjects, submission_name='submission', scale='minmax')
+    merge_csv_data(submission_path, subjects, submission_name='submission', scale='softmax')
+    merge_csv_data(submission_path, subjects, submission_name='submission', scale='median')
+    merge_csv_data(submission_path, subjects, submission_name='submission')
 
 
 if __name__ == '__main__':
