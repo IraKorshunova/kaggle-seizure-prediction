@@ -21,14 +21,14 @@ We explored several architectures, one example is shown below.
 
 Its first layer (C1) performs convolution in a time dimension over all N channels and all 6 frequency bands, so the shape of its filters is 6xNx1. C1 has 16 feature maps each of shape 1x10. The second layer (C2) performs convolution with 32 filters of size 16x2. C2 is followed by a global temporal pooling layer GP3, which computes the following statistics: mean, maximum, minimum, variance, geometrical mean, L2 norm over 9 values in each feature map from C2. GP3 is fully connected with 128 units in F4 layer. Output of the network is a logistic regression unit. 
 
-C1 and C2 layers are composed from Rectified linear units, tanh activation are used in the hidden layer.
+C1 and C2 layers are composed from Rectified linear units, tanh activation is used in the hidden layer.
 
 ## Training
-We used  mini-batches of 10 examples and trained the network with ADADELTA method. Inputs to the network were previously standardized. Dropout was used in last 2 layers.
+We used  mini-batches of 10 examples and trained the network with ADADELTA method. Inputs to the network were previously standardized. Dropout was used in the last 2 layers.
 
 ##Model averaging
 As a final model we used geometric mean of predictions (normalized to 0-1 range for each subject) obtained from 11 convnets. See 
-[setting_dir](https://github.com/IraKorshunova/kaggle-seizure-prediction/tree/master/settings_dir) for exact parameters of each convnet.
+[setting_dir](https://github.com/IraKorshunova/kaggle-seizure-prediction/tree/master/settings_dir) for the exact parameters of each convnet.
 
 
 ##Code
