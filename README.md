@@ -2,7 +2,7 @@
 
 ##Introduction
 
-This document roughly discusses my approach to [Kaggle Seizure Prediction Challenge](http://www.kaggle.com/c/seizure-prediction), which resulted in the 10th place. The goal of the competition was to classify 10 minute intracranial EEG (iEEG) data clips into *preictal* for pre-seizure data or *interictal* for non-seizure data segments. For this problem I used convolutional neural networks (convnets). The following description provides a few excerpts from my master's thesis, which is available [here](kaggle-seizure-prediction/thesis.pdf).
+This document roughly discusses my approach to [Kaggle Seizure Prediction Challenge](http://www.kaggle.com/c/seizure-prediction), which resulted in the 10th place. The goal of the competition was to classify 10 minute intracranial EEG (iEEG) data clips into *preictal* for pre-seizure data or *interictal* for non-seizure data segments. For this problem I used convolutional neural networks (convnets). The following description provides a few excerpts from my master's thesis, which is available [here](https://github.com/IraKorshunova/kaggle-seizure-prediction/blob/master/thesis.pdf).
 
 ##Features
 The first preprocessing steps were to resample the signal to 400 Hz and apply a band-pass filter between 0.1-180 Hz.
