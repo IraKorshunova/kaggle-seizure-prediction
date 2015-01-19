@@ -29,7 +29,7 @@ def get_cmap(N):
     return map_index_to_rgb_color
 
 
-def plot_logits(subject, data_path, model_path, test_labels, dataset='test'):
+def plot_features(subject, data_path, model_path, test_labels, dataset='test'):
     with open(model_path + '/' + subject + '.pickle', 'rb') as f:
         state_dict = cPickle.load(f)
     cnn = ConvNet(state_dict['params'])
@@ -50,10 +50,10 @@ def plot_logits(subject, data_path, model_path, test_labels, dataset='test'):
         else scale_across_features(x, x_test=None, scalers=scalers)
 
     cnn.batch_size.set_value(x.shape[0])
-    get_logits = theano.function([cnn.x, Param(cnn.training_mode, default=0)], cnn.feature_extractor.output,
+    get_features = theano.function([cnn.x, Param(cnn.training_mode, default=0)], cnn.feature_extractor.output,
                                  allow_input_downcast=True)
 
-    logits_test = get_logits(x)
+    logits_test = get_features(x)
     model = TSNE(n_components=2, random_state=0)
     z = model.fit_transform(np.float64(logits_test))
     plt.scatter(z[:, 0], z[:, 1], s=60, c=y)
@@ -191,5 +191,5 @@ if __name__ == '__main__':
     for subject in subjects:
         print '***********************', subject, '***************************'
         plot_train_test(subject, data_path)
-        plot_logits(subject, data_path, model_path, labels_df[subject], dataset='train')
+        plot_features(subject, data_path, model_path, labels_df[subject], dataset='train')
         plot_sequences(subject, data_path, labels_df[subject])
