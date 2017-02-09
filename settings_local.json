@@ -1,8 +1,0 @@
-{
-  "ROOT": "/mnt/storage/users/ikorshun/kaggle-seizure-predict",
-  "RAW_DATA_PATH": "/mnt/storage/users/ikorshun/data/kaggle-seizure-prediction/raw",
-  "PROCESSED_DATA_PATH": "/mnt/storage/users/ikorshun/data/kaggle-seizure-prediction/processed",
-  "LABELS_PATH": "/mnt/storage/users/ikorshun/data/kaggle-seizure-prediction/labels",
-  "METADATA_PATH": "/mnt/storage/users/ikorshun/kaggle-seizure-predict/metadata",
-  "IMG_PATH": "/mnt/storage/users/ikorshun/kaggle-seizure-predict/metadata/images"
-}
